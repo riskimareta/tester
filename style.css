@@ -1,0 +1,167 @@
+/* ===== STYLE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Consolas, monospace;
+}
+
+body {
+  background: #0b0b0b;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00ff9c;
+}
+
+/* ===== LOGO DI TENGAH ====== */
+
+#logo-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#boot-logo {
+  position: relative; /* PENTING */
+  color: #00ff00;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.2;
+  text-align: center;
+
+  text-shadow: 0 0 8px #00ff00;
+}
+
+/* LAYER GLITCH */
+#boot-logo::before,
+#boot-logo::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  white-space: pre;
+  pointer-events: none;
+}
+
+/* MERAH */
+#boot-logo::before {
+  color: red;
+  animation: glitchTop 0.6s infinite linear;
+}
+
+/* CYAN */
+#boot-logo::after {
+  color: cyan;
+  animation: glitchBottom 0.6s infinite linear;
+}
+
+@keyframes glitchTop {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, -2px); }
+  40% { transform: translate(2px, 0); }
+  60% { transform: translate(-1px, 1px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes glitchBottom {
+  0% { transform: translate(0); }
+  20% { transform: translate(2px, 2px); }
+  40% { transform: translate(-2px, 0); }
+  60% { transform: translate(1px, -1px); }
+  100% { transform: translate(0); }
+}
+
+/* ===== LOADING ===== */
+#loading {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loader {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,100% { opacity: 1 }
+  50% { opacity: .3 }
+}
+
+/* ===== TERMINAL ===== */
+#terminal {
+  width: 70%;
+  max-width: 900px;
+  background: #000;
+  border: 1px solid #333;
+  box-shadow: 0 0 25px rgba(0,255,156,.2);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== TITLE BAR ===== */
+.title-bar {
+  background: #111;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+}
+
+.window-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.minimize { background: #f1c40f; }
+.maximize { background: #2ecc71; }
+.close { background: #e74c3c; }
+
+.title {
+  margin-left: 12px;
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* ===== BODY ===== */
+#terminalBody {
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.4;
+  overflow-y: auto;
+  height: 400px;
+}
+
+.hidden-body {
+  display: none;
+}
+
+/* ===== INPUT ===== */
+.input-line {
+  display: flex;
+}
+
+.prompt {
+  margin-right: 6px;
+}
+
+input {
+  background: transparent;
+  border: none;
+  color: #00ff9c;
+  outline: none;
+  width: 100%;
+}

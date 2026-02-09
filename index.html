@@ -3,120 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <title>riskimareta — Terminal</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Consolas, monospace;
-}
-
-body {
-  background: #0b0b0b;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #00ff9c;
-}
-
-/* ===== LOADING ===== */
-#loading {
-  position: fixed;
-  inset: 0;
-  background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-.loader {
-  animation: blink 1s infinite;
-}
-
-@keyframes blink {
-  0%,100% { opacity: 1 }
-  50% { opacity: .3 }
-}
-
-/* ===== TERMINAL ===== */
-#terminal {
-  width: 70%;
-  max-width: 900px;
-  background: #000;
-  border: 1px solid #333;
-  box-shadow: 0 0 25px rgba(0,255,156,.2);
-  display: flex;
-  flex-direction: column;
-}
-
-/* ===== TITLE BAR ===== */
-.title-bar {
-  background: #111;
-  padding: 6px 10px;
-  display: flex;
-  align-items: center;
-}
-
-.window-buttons {
-  display: flex;
-  gap: 8px;
-}
-
-.btn {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.minimize { background: #f1c40f; }
-.maximize { background: #2ecc71; }
-.close { background: #e74c3c; }
-
-.title {
-  margin-left: 12px;
-  font-size: 12px;
-  color: #aaa;
-}
-
-/* ===== BODY ===== */
-#terminalBody {
-  padding: 16px;
-  font-size: 14px;
-  line-height: 1.4;
-  overflow-y: auto;
-  height: 400px;
-}
-
-.hidden-body {
-  display: none;
-}
-
-/* ===== INPUT ===== */
-.input-line {
-  display: flex;
-}
-
-.prompt {
-  margin-right: 6px;
-}
-
-input {
-  background: transparent;
-  border: none;
-  color: #00ff9c;
-  outline: none;
-  width: 100%;
-}
-</style>
-</head>
-
 <body>
-
 <div id="loading">
   <div class="loader">Loading system...</div>
 </div>
@@ -128,18 +19,26 @@ input {
       <div class="btn maximize" onclick="maximize()"></div>
       <div class="btn close" onclick="closeTerminal()"></div>
     </div>
-    <div class="title">C:\Users\riskimareta\cmd.exe</div>
+    <div class="title">C:\Users\##########\Terminal.exe</div>
   </div>
-
   <div id="terminalBody">
-<pre>
+   
+<div id="logo-wrapper">
+  <pre id="boot-logo" data-text="██████╗ ██╗███████╗██╗  ██╗██╗
+██╔══██╗██║██╔════╝██║ ██╔╝██║
+██████╔╝██║███████╗█████╔╝ ██║
+██╔══██╗██║╚════██║██╔═██╗ ██║
+██║  ██║██║███████║██║  ██╗██║
+╚═╝  ╚═╝╚═╝╚══════╝╚═╝  ╚═╝╚═╝
+">
 ██████╗ ██╗███████╗██╗  ██╗██╗
 ██╔══██╗██║██╔════╝██║ ██╔╝██║
 ██████╔╝██║███████╗█████╔╝ ██║
 ██╔══██╗██║╚════██║██╔═██╗ ██║
 ██║  ██║██║███████║██║  ██╗██║
 ╚═╝  ╚═╝╚═╝╚══════╝╚═╝  ╚═╝╚═╝
-</pre>
+  </pre>
+</div>
 
 <div id="output"></div>
 
@@ -147,64 +46,5 @@ input {
   <span class="prompt">riskimareta@terminal:~$</span>
   <input id="commandInput" autofocus />
 </div>
-  </div>
-</div>
-
-<script>
-/* ===== LOADING ===== */
-window.onload = () => {
-  setTimeout(() => {
-    loading.style.display = "none";
-    commandInput.focus();
-  }, 1500);
-};
-
-/* ===== TERMINAL LOGIC ===== */
-const input = document.getElementById("commandInput");
-const output = document.getElementById("output");
-
-input.addEventListener("keydown", e => {
-  if (e.key === "Enter") {
-    const cmd = input.value.trim();
-    output.innerHTML += `<div>> ${cmd}</div>`;
-    handleCommand(cmd);
-    input.value = "";
-    terminalBody.scrollTop = terminalBody.scrollHeight;
-  }
-});
-
-function handleCommand(cmd) {
-  switch (cmd) {
-    case "help":
-      output.innerHTML += "<div>Commands: help, whoami, date, clear</div>";
-      break;
-    case "whoami":
-      output.innerHTML += "<div>riskimareta</div>";
-      break;
-    case "date":
-      output.innerHTML += `<div>${new Date()}</div>`;
-      break;
-    case "clear":
-      output.innerHTML = "";
-      break;
-    default:
-      output.innerHTML += "<div>Command not found</div>";
-  }
-}
-
-/* ===== WINDOW CONTROLS ===== */
-function minimize() {
-  terminalBody.classList.toggle("hidden-body");
-}
-
-function maximize() {
-  terminal.classList.toggle("maximized");
-}
-
-function closeTerminal() {
-  terminal.innerHTML = "<div style='padding:20px;color:red'>Terminal closed</div>";
-}
-</script>
-
 </body>
 </html>
