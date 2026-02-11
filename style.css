@@ -7,7 +7,7 @@
 }
 
 body {
-  background: #0b0b0b;
+  background: #2e2e2e;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -15,8 +15,7 @@ body {
   color: #00ff9c;
 }
 
-/* ===== LOGO DI TENGAH ====== */
-
+/* ===== LOGO DI TENGAH ===== */
 #logo-wrapper {
   position: absolute;
   top: 50%;
@@ -25,7 +24,7 @@ body {
 }
 
 #boot-logo {
-  position: relative; /* PENTING */
+  position: relative;
   color: #00ff00;
   font-family: monospace;
   font-size: 14px;
@@ -55,7 +54,7 @@ body {
 
 /* CYAN */
 #boot-logo::after {
-  color: cyan;
+  color: rgb(94, 10, 250);
   animation: glitchBottom 0.6s infinite linear;
 }
 
@@ -95,73 +94,120 @@ body {
   50% { opacity: .3 }
 }
 
-/* ===== TERMINAL ===== */
+/* ===== TERMINAL WINDOW ===== */
 #terminal {
-  width: 70%;
-  max-width: 900px;
-  background: #000;
-  border: 1px solid #333;
-  box-shadow: 0 0 25px rgba(0,255,156,.2);
-  display: flex;
-  flex-direction: column;
+  position: center;
+  top: 60px;
+  left: 60px;
+  width: 700px;
+  height: 400px;
+
+  background: black;
+  border: 2px solid #00ff00;
+  border-radius: 4px;
+  color: #00ff00;
+
+  box-shadow: 0 0 10px #00aaff;
+
+  transition:
+    width 0.35s ease,
+    height 0.35s ease,
+    top 0.35s ease,
+    left 0.35s ease,
+    border-radius 0.35s ease;
+}
+
+/* ===== MINIMIZED ===== */
+#terminal-body.minimized {
+  display: none;
+}
+
+/* ===== CLOSED ===== */
+#terminal.closed {
+  display: none;
+}
+
+/* ===== MAXIMIZED ===== */
+#terminal.maximized {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  border-radius: 0;
 }
 
 /* ===== TITLE BAR ===== */
 .title-bar {
-  background: #111;
-  padding: 6px 10px;
+  height: 32px;
+  background: #0ccce6;
   display: flex;
   align-items: center;
+  justify-content: space-between; /* kiri & kanan */
+  padding: 0 8px;
 }
 
-.window-buttons {
+.title {
+  color: #000000;
+  font-family: monospace;
+  font-size: 13px;
+}
+
+.window-controls {
   display: flex;
-  gap: 8px;
+  gap: 6px;
 }
 
-.btn {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
+.title-bar button {
+  background: #222;
+  color: white;
+  border: none;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
 }
 
-.minimize { background: #f1c40f; }
-.maximize { background: #2ecc71; }
-.close { background: #e74c3c; }
+/* ===== TERMINAL BODY ===== */
+#terminal-body {
+  height: calc(100% - 32px);
+  padding: 10px;
 
-.title {
-  margin-left: 12px;
-  font-size: 12px;
-  color: #aaa;
+  display: flex;              /* 🔑 KUNCI UTAMA */
+  flex-direction: column;
+
+  overflow: hidden;           /* 🔑 JANGAN AUTO */
 }
 
-/* ===== BODY ===== */
-#terminalBody {
-  padding: 16px;
-  font-size: 14px;
-  line-height: 1.4;
-  overflow-y: auto;
-  height: 400px;
-}
-
-.hidden-body {
-  display: none;
+/* ===== OUTPUT ===== */
+#output {
+  flex: 1;                    /* ambil sisa tinggi */
+  overflow-y: auto;           /* scroll di sini */
+  white-space: pre-wrap;
 }
 
 /* ===== INPUT ===== */
 .input-line {
   display: flex;
+  align-items: flex-start; /* ⬅ kiri atas */
+  gap: 8px;
+
+  flex-shrink: 0;
 }
 
 .prompt {
-  margin-right: 6px;
+  color: #00ff00;
+  font-family: monospace;
+  white-space: nowrap;
+  line-height: 1.2;
 }
 
-input {
+#commandInput {
+  flex: 1;
   background: transparent;
   border: none;
-  color: #00ff9c;
   outline: none;
-  width: 100%;
+
+  color: #00ff00;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.2;
 }

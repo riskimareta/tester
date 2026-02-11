@@ -14,37 +14,41 @@
 
 <div id="terminal">
   <div class="title-bar">
-    <div class="window-buttons">
-      <div class="btn minimize" onclick="minimize()"></div>
-      <div class="btn maximize" onclick="maximize()"></div>
-      <div class="btn close" onclick="closeTerminal()"></div>
-    </div>
     <div class="title">C:\Users\##########\Terminal.exe</div>
+  
+    <div class="window-controls">
+    <button id="btn-minimize">─</button>
+    <button id="btn-maximize">☐</button>
+    <button id="btn-close">✕</button>
   </div>
-  <div id="terminalBody">
-   
-<div id="logo-wrapper">
-  <pre id="boot-logo" data-text="██████╗ ██╗███████╗██╗  ██╗██╗
+</div> 
+
+  <!-- BOOT LOGO (OPSIONAL, DI ATAS BODY) -->
+  <div id="logo-wrapper">
+    <pre id="boot-logo" data-text="██████╗ ██╗███████╗██╗  ██╗██╗
 ██╔══██╗██║██╔════╝██║ ██╔╝██║
 ██████╔╝██║███████╗█████╔╝ ██║
 ██╔══██╗██║╚════██║██╔═██╗ ██║
 ██║  ██║██║███████║██║  ██╗██║
-╚═╝  ╚═╝╚═╝╚══════╝╚═╝  ╚═╝╚═╝
-">
+╚═╝  ╚═╝╚═╝╚══════╝╚═╝  ╚═╝╚═╝">
 ██████╗ ██╗███████╗██╗  ██╗██╗
 ██╔══██╗██║██╔════╝██║ ██╔╝██║
 ██████╔╝██║███████╗█████╔╝ ██║
 ██╔══██╗██║╚════██║██╔═██╗ ██║
 ██║  ██║██║███████║██║  ██╗██║
 ╚═╝  ╚═╝╚═╝╚══════╝╚═╝  ╚═╝╚═╝
-  </pre>
-</div>
+    </pre>
+  </div>
 
-<div id="output"></div>
+  <!-- ✅ SEMUA ISI TERMINAL HARUS DI DALAM INI -->
+  <div id="terminal-body">
+    
+    <div class="input-line">
+      <span class="prompt">riskimareta@terminal:~$</span>
+      <input id="commandInput" />
+    </div>
 
-<div class="input-line">
-  <span class="prompt">riskimareta@terminal:~$</span>
-  <input id="commandInput" autofocus />
+    <div id="output"></div>
+
+  </div>
 </div>
-</body>
-</html>
